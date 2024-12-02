@@ -30,7 +30,7 @@ namespace ResponsiJuniorProject
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            employeeRepository.Insert(tbNama, cbDepartemen, btnLoadData);
+            employeeRepository.Insert(tbNama, cbDepartemen, cbJabatan, btnLoadData);
         }
 
         private void dgvData_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -47,12 +47,12 @@ namespace ResponsiJuniorProject
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            employeeRepository.Edit(tbNama, cbDepartemen, btnLoadData);
+            employeeRepository.Edit(tbNama, cbDepartemen, cbJabatan, btnLoadData);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            employeeRepository.Delete(tbNama, cbDepartemen, btnLoadData);
+            employeeRepository.Delete(tbNama, cbDepartemen, cbJabatan, btnLoadData);
         }
     }
 }

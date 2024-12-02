@@ -48,19 +48,20 @@ namespace ResponsiJuniorProject
             finally { connection.Close(); }
         }
 
-        public void Insert(TextBox tbNama, ComboBox cbDept, Button btnLoad)
+        public void Insert(TextBox tbNama, ComboBox cbDept, ComboBox cbJabatan, Button btnLoad)
         {
             try
             {
                 connection.Open();
                 dgvData.DataSource = null;
                 dt = new DataTable();
-                string sql = "select * from emp_insert(:_nama, :_id_dept)";
+                string sql = "select * from emp_insert(:_nama, :_id_dept, :_id_jabatan)";
                 cmd = new NpgsqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("_nama", tbNama.Text);
                 cmd.Parameters.AddWithValue("_id_dept", int.Parse(cbDept.Text));
+                cmd.Parameters.AddWithValue("_id_jabatan", int.Parse(cbJabatan.Text));
 
-                if((int)cmd.ExecuteScalar() == 1)
+                if ((int)cmd.ExecuteScalar() == 1)
                 {
                     MessageBox.Show("Data berhasil ditambahkan");
                     connection.Close();
@@ -77,7 +78,7 @@ namespace ResponsiJuniorProject
             finally { connection.Close(); }
         }
 
-        public void Edit(TextBox tbNama, ComboBox cbDept, Button btnLoad)
+        public void Edit(TextBox tbNama, ComboBox cbDept, ComboBox cbJabatan, Button btnLoad)
         {
             if (row == null)
             {
@@ -86,11 +87,12 @@ namespace ResponsiJuniorProject
             try
             {
                 connection.Open();
-                string sql = "select * from emp_update(:_id, :_nama, :_id_dept)";
+                string sql = "select * from emp_update(:_id, :_nama, :_id_dept, :_id_jabatan)";
                 cmd = new NpgsqlCommand(sql, connection);
                 cmd.Parameters.AddWithValue("_id", row.Cells["_id_karyawan"].Value.ToString());
                 cmd.Parameters.AddWithValue("_nama", tbNama.Text);
                 cmd.Parameters.AddWithValue("_id_dept", int.Parse(cbDept.Text));
+                cmd.Parameters.AddWithValue("_id_jabatan", int.Parse(cbJabatan.Text));
 
                 if ((int)cmd.ExecuteScalar() == 1)
                 {
@@ -110,7 +112,7 @@ namespace ResponsiJuniorProject
             finally { connection.Close(); }
         }
 
-        public void Delete(TextBox tbNama, ComboBox cbDept, Button btnLoad)
+        public void Delete(TextBox tbNama, ComboBox cbDept, ComboBox cbJabatan, Button btnLoad)
         {
             if (row == null)
             {
